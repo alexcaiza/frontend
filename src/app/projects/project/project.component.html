@@ -1,0 +1,47 @@
+<!--
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Project</span>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a routerLink="/project/list" routerLinkActive="active" class="nav-link pl-0">
+                List Games
+            </a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/project/create" routerLinkActive="active" class="nav-link pl-0">
+                Add Games
+            </a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/project/update" routerLinkActive="active" class="nav-link pl-0">
+                Projects
+            </a>
+        </li>
+    </ul>
+</nav>
+-->
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="#">Project</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" routerLink="/project/list" routerLinkActive="active">List<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/project/create" routerLinkActive="active">Create</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/project/update" routerLinkActive="active">Update</a>
+            </li>
+          </ul>
+          <span class="navbar-text">
+            Lista de projects
+          </span>
+        </div>
+      </nav>
+
+<router-outlet></router-outlet>

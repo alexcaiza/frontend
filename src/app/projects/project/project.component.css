@@ -8,12 +8,4 @@
 
 .navbar-nav .nav-item:first-child .nav-link {
     padding-left: 1px;
-}        
-
-.table-condensed{
-    font-size: 10px;
-}
-
-.flash-messages {
-    font-size: 0.7rem;
-}
+}    
