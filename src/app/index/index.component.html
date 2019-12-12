@@ -1,9 +1,9 @@
-<table class="table table-hover">
+<table class="table table-hover table-condensed">
         <thead>
         <tr>
-            <td>Game Name</td>
-            <td>Game Price</td>
-            <td colspan="2">Actions</td>
+            <th>Game Name</th>
+            <th>Game Price</th>
+            <th colspan="2">Actions</th>
         </tr>
         </thead>
       
@@ -11,8 +11,8 @@
             <tr *ngFor="let game of games">
                 <td  title="{{ game.id }}">{{ game.name }}</td>
                 <td>{{ game.price }}</td>
-                <td><a [routerLink]="['/edit', game.id]" class="btn btn-primary">Edit</a></td>
-                <td><button (click)="deleteGame(game.id)"  class="btn btn-danger">Delete</button></td>
+                <td><a [routerLink]="['/edit', game.id]" class="btn btn-primary btn-xs">Edit</a></td>
+                <td><button (click)="deleteGame(game.id)"  class="btn btn-danger btn-xs">Delete</button></td>
             </tr>
         </tbody>
       </table>

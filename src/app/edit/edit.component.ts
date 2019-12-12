@@ -34,7 +34,7 @@ export class EditComponent implements OnInit {
     });
   }
 
-  updateGame(name, price) {
+  updateGame(name, price, id) {
     this.route.params.subscribe(params => {
       this.service.updateGame2(name, price, params['id']);
       this.router.navigate(['index']);

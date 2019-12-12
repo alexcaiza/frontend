@@ -35,14 +35,20 @@ export class GameService {
   }
 
   updateGame2(name, price, id) {
+    
+    console.log("Metodo: updateGame2()");
 
     const obj = {
+      id: id,
       name: name,
       price: price
     };
+
+    console.log(obj);
+
     this
       .httpClient
-      .post(`${this.PHP_API_SERVER}/update/${id}`, obj)
+      .post(`${this.PHP_API_SERVER}/games/update.php/${id}`, obj)
       .subscribe(res => console.log('Done'));
   }
 }

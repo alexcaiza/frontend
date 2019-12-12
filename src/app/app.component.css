@@ -1,0 +1,15 @@
+.navbar-nav {
+    font-size: 0.7rem;
+    }
+
+    .navbar {
+        padding: 0 1rem;
+        }
+
+.navbar-nav .nav-item:first-child .nav-link {
+    padding-left: 1px;
+}        
+
+.table-condensed{
+    font-size: 10px;
+}

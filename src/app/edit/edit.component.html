@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button (click)="updateGame(name.value, price.value)" [disabled]="angForm.pristine || angForm.invalid"
+                <button (click)="updateGame(name.value, price.value, game.id)" [disabled]="angForm.pristine || angForm.invalid"
                     class="btn btn-primary">Update</button>
             </div>
         </form>
