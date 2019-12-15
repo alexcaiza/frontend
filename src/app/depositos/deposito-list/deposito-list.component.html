@@ -30,7 +30,11 @@
             <td>
                 {{ deposito.tipodeposito }}
             </td>
-            <td><a [routerLink]="['/edit', deposito.id]" class="btn btn-primary btn-sm">Edit</a></td>
+            <td>
+                <a 
+                    [routerLink]="['/edit', deposito.id]" class="btn btn-primary btn-sm fontsize"
+                    >Edit</a>
+                </td>
 
         </tr>
     </tbody>

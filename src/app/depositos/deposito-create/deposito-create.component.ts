@@ -17,8 +17,6 @@ export class DepositoCreateComponent implements OnInit {
   //persona: any = {};
 
   cedula: string;
-
-  personas: Persona[];
   persona: Persona;
 
   constructor(
@@ -29,11 +27,14 @@ export class DepositoCreateComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.cedula = '100';
+    this.cedula = '';
     this.buildForm();
   }
 
   private buildForm() {
+
+    this.persona = null;
+
     const dateLength = 10;
     const today = new Date().toISOString().substring(0, dateLength);
 
@@ -43,15 +44,6 @@ export class DepositoCreateComponent implements OnInit {
       fechadeposito: [today, Validators.required],
       tipodeposito: ['', Validators.required],
       numerodeposito: ['', Validators.required],
-    });
-  }
-
-  readPersonas() {
-    console.log('METODO: DepositoCreateComponent.buscarPersonas()');
-    this.personasService.readPersonas().subscribe((personas: Persona[]) => {
-      this.personas = personas;
-      console.log(this.personas);
-      this.flashMessagesService.show('La busqueda de socios se realizo correctamente.', { cssClass: 'alert-success', timeout: 2000 });
     });
   }
 
@@ -124,6 +116,28 @@ export class DepositoCreateComponent implements OnInit {
       return;
     }
 
+    const datos : any = this.formGroup.value;
+
+    if (this.persona != null) {
+      datos.codigopersona = this.persona.codigopersona;
+    }
+
+    console.log(datos);
+
+    this.depositosService.createDeposito(datos).subscribe((response: any) => {
+      console.log("response:");
+      console.log(response);
+
+      if (response.deposito && response.deposito.codigodeposito !== null && response.deposito.codigodeposito > 0) {
+        this.flashMessagesService.show('El registro del deposito '+  datos.numerodeposito +' del socio ' + this.persona.cedula + 'se realizo correctamente.', { cssClass: 'alert-success', timeout: 2000 });
+      }
+      else {
+        this.flashMessagesService.show(response.mensaje, { cssClass: 'alert-danger', timeout: 2000 });
+      }
+
+      this.buildForm();
+
+    });
 
   }
 
