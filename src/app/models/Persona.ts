@@ -1,4 +1,4 @@
-export interface Deposito {
+export interface Persona {
     codigopersona: Number;
     cedula: String;
     primernombre: String;

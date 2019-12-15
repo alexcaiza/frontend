@@ -25,9 +25,14 @@
         <i class="fa fa-check"></i>
       </li>
       <li>
-          <a class="btn btn-default" href="path/to/settings" aria-label="Settings">
+          <a class="btn btn-default" (click)="buscarDepositos()" aria-label="Settings">
             <i class="fa fa-refresh" aria-hidden="true"></i>
           </a>
+      </li>
+      <li>
+          <button (click)="buscarDepositos()">
+              <i class="fa fa-refresh" aria-hidden="true"></i>
+          </button>
       </li>
       <li>
           <a href="#" class="btn btn-success btn-sm">

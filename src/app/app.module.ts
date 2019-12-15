@@ -1,3 +1,4 @@
+import { EventEmitterService } from './servicios/event-emitter.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,6 +24,9 @@ import { DepositoUpdateComponent } from './depositos/deposito-update/deposito-up
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
+//import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgHttpLoaderModule } from 'ng-http-loader';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,10 +49,13 @@ import { FlashMessagesService } from 'angular2-flash-messages';
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FlashMessagesModule
+    FlashMessagesModule,
+    //NgxSpinnerModule,
+    NgHttpLoaderModule.forRoot(),
   ],
   providers: [
-    FlashMessagesService
+    FlashMessagesService,
+    EventEmitterService
   ],
   bootstrap: [AppComponent]
 })
