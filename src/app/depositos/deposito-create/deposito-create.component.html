@@ -21,10 +21,22 @@
                 <label for="disabledTextInput" class="col-sm-2 col-form-label col-form-label-sm">Nombre</label>
                 <div class="col-sm-10">
                     <input type="text" id="disabledTextInput"
-                        class="form-control form-control-sm form-control-plaintext" disabled placeholder="N/D" readonly
-                        value="{{ persona?.primernombre }} {{ persona?.segundonombre }} {{ persona?.primerapellido }} {{ persona?.segundoapellido }}">
+                        class="form-control form-control-sm form-control-plaintext py-2" disabled placeholder="N/D" readonly
+                        value="{{ persona?.primernombre }} {{ persona?.segundonombre }} {{ persona?.primerapellido }} {{ persona?.segundoapellido }}"
+                        >
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label for="txtNroDeposito" class="col-sm-2 col-form-label col-form-label-sm">Nro deposito</label>
+                <div class="col-sm-10">
+                    <input class="form-control form-control-sm" type="text" placeholder=""
+                        id="txtNroDeposito"
+                        formControlName="numerodeposito"
+                        >
+                </div>
+            </div>
+
             <div class="form-group row">
                 <label for="inputValorDeposito" class="col-sm-2 col-form-label col-form-label-sm">Valor deposito</label>
                 <div class="col-sm-10">
@@ -43,14 +55,18 @@
                 <label for="inputValor" class="col-sm-2 col-form-label col-form-label-sm">Tipo</label>
                 <div class="col-sm-10">
                     <div class="form-check form-check-sm">
-                        <input class="form-check-input form-check-input-sm" type="radio" name="gridRadios"
-                            id="gridRadios1" value="option1">
+                        <input class="form-check-input form-check-input-sm" type="radio" name="tipodeposito"
+                            id="gridRadios1" value="DEP"
+                            formControlName="tipodeposito">
                         <label class="form-check-label form-check-label-sm" for="gridRadios1">
                             Deposito
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                        <input class="form-check-input" type="radio" name="tipodeposito" 
+                            id="gridRadios2" 
+                            value="TRA"
+                            formControlName="tipodeposito">
                         <label class="form-check-label" for="gridRadios2">
                             Transferencia
                         </label>

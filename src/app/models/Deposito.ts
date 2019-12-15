@@ -4,6 +4,7 @@ export interface Deposito {
     codigopersona: Number;
     fechadeposito: Date;
     valordeposito: Number;
+    tipodeposito: String;
     cedula: String;
     primernombre: String;
     segundonombre: String;

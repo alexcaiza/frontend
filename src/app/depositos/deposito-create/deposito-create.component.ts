@@ -42,6 +42,7 @@ export class DepositoCreateComponent implements OnInit {
       valordeposito: ['', Validators.required],
       fechadeposito: [today, Validators.required],
       tipodeposito: ['', Validators.required],
+      numerodeposito: ['', Validators.required],
     });
   }
 
@@ -91,6 +92,14 @@ export class DepositoCreateComponent implements OnInit {
       return;
     }
 
+    const numerodeposito = this.formGroup.get("numerodeposito").value;
+    console.log('numerodeposito: ' + numerodeposito);
+
+    if (numerodeposito == null || numerodeposito === '') {
+      this.flashMessagesService.show('Ingrese el numero del deposito.', { cssClass: 'alert-danger', timeout: 2000 });
+      return;
+    }
+
     const valordeposito = this.formGroup.get("valordeposito").value;
     console.log('valordeposito: ' + valordeposito);
 
@@ -104,6 +113,14 @@ export class DepositoCreateComponent implements OnInit {
 
     if (fechadeposito == null || fechadeposito === '') {
       this.flashMessagesService.show('Ingrese la fecha del deposito.', { cssClass: 'alert-danger', timeout: 2000 });
+      return;
+    }
+
+    const tipodeposito = this.formGroup.get("tipodeposito").value;
+    console.log('tipodeposito: ' + tipodeposito);
+
+    if (tipodeposito == null || tipodeposito === '') {
+      this.flashMessagesService.show('Seleccione el tipo de deposito.', { cssClass: 'alert-danger', timeout: 2000 });
       return;
     }
 

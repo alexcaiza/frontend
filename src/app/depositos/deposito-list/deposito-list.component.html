@@ -6,6 +6,7 @@
             <th>Deposito</th>
             <th>Valor</th>
             <th>Fecha</th>
+            <th>Tipo</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -26,7 +27,9 @@
             <td>
                 {{ deposito.fechadeposito | date: 'yyyy-MM-dd' }}
             </td>
-
+            <td>
+                {{ deposito.tipodeposito }}
+            </td>
             <td><a [routerLink]="['/edit', deposito.id]" class="btn btn-primary btn-sm">Edit</a></td>
 
         </tr>
