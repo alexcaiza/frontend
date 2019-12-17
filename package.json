@@ -24,6 +24,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "ng-http-loader": "^6.0.1",
+    "ng2-completer": "^3.0.3",
     "popper.js": "^1.16.0",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",

@@ -27,6 +27,9 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 //import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 
+import { Ng2CompleterModule } from 'ng2-completer';
+import { ExampleComponent } from './example/example.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +44,8 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     DepositoComponent,
     DepositoListComponent,
     DepositoCreateComponent,
-    DepositoUpdateComponent
+    DepositoUpdateComponent,
+    ExampleComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +56,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     FlashMessagesModule,
     //NgxSpinnerModule,
     NgHttpLoaderModule.forRoot(),
+    Ng2CompleterModule
   ],
   providers: [
     FlashMessagesService,

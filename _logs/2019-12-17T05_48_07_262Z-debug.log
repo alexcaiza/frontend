@@ -1,0 +1,41 @@
+0 info it worked if it ends with ok
+1 verbose cli [
+1 verbose cli   'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'ng2-completer',
+1 verbose cli   '–save'
+1 verbose cli ]
+2 info using npm@6.12.0
+3 info using node@v12.13.0
+4 verbose npm-session a469571bcab78522
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData error for ng2-completer@latest install ng2-completer –save is not a legal HTTP header value
+8 timing stage:rollbackFailedOptional Completed in 16ms
+9 timing stage:runTopLevelLifecycles Completed in 30458ms
+10 verbose stack Error: Invalid tag name "–save": Tags may not have any characters that encodeURIComponent encodes.
+10 verbose stack     at invalidTagName (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-package-arg\npa.js:91:15)
+10 verbose stack     at fromRegistry (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-package-arg\npa.js:296:13)
+10 verbose stack     at resolve (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-package-arg\npa.js:81:12)
+10 verbose stack     at npa (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-package-arg\npa.js:52:10)
+10 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\install\deps.js:222:14
+10 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:52:35
+10 verbose stack     at Array.forEach (<anonymous>)
+10 verbose stack     at C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:52:11
+10 verbose stack     at Array.forEach (<anonymous>)
+10 verbose stack     at asyncMap (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:51:8)
+10 verbose stack     at exports.getAllMetadata (C:\Program Files\nodejs\node_modules\npm\lib\install\deps.js:219:3)
+10 verbose stack     at Installer.loadArgMetadata (C:\Program Files\nodejs\node_modules\npm\lib\install.js:360:3)
+10 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\install.js:695:16
+10 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\install\read-shrinkwrap.js:34:16
+10 verbose stack     at tryCatcher (C:\Program Files\nodejs\node_modules\npm\node_modules\bluebird\js\release\util.js:16:23)
+10 verbose stack     at Promise._settlePromiseFromHandler (C:\Program Files\nodejs\node_modules\npm\node_modules\bluebird\js\release\promise.js:517:31)
+11 verbose cwd E:\JAVA\ng\angular6\frontend
+12 verbose Windows_NT 10.0.18362
+13 verbose argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "ng2-completer" "–save"
+14 verbose node v12.13.0
+15 verbose npm  v6.12.0
+16 error code EINVALIDTAGNAME
+17 error Invalid tag name "–save": Tags may not have any characters that encodeURIComponent encodes.
+18 verbose exit [ 1, true ]

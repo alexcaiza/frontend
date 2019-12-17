@@ -1,3 +1,4 @@
+import { ExampleComponent } from './example/example.component';
 import { DepositoCreateComponent } from './depositos/deposito-create/deposito-create.component';
 import { DepositoUpdateComponent } from './depositos/deposito-update/deposito-update.component';
 import { DepositoListComponent } from './depositos/deposito-list/deposito-list.component';
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'index',
     component: IndexComponent
+  },
+  {
+    path: 'example',
+    component: ExampleComponent
   },
   {
     path: 'project',
