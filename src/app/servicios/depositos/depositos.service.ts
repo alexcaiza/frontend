@@ -10,7 +10,8 @@ export class DepositosService {
 
   PHP_API_SERVER = "http://127.0.0.1:80/angular-php-app/backend/depositos";
 
-  XDEBUG_SESSION_START = "?XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=15764311442171";
+  //XDEBUG_SESSION_START = "?XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=15764311442171";
+  XDEBUG_SESSION_START = "";
   
   constructor(private httpClient: HttpClient) {
   }

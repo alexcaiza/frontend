@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 .flash-messages {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
 }
 
 .fontsizeb {
@@ -14,4 +14,12 @@
 .col-form-label{
     font-size: 11px;
     font-weight: bold;
+}
+
+.form-control-xs {
+    height: calc(1em + .375rem + 2px) !important;
+    padding: .125rem .25rem !important;
+    font-size: .6rem !important;
+    line-height: 1.5;
+    border-radius: .2rem;
 }

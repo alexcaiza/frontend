@@ -1,4 +1,42 @@
-<table class="table table-hover table-condensed">
+<form [formGroup]="formBusqueda">
+    <div class="form-row form-row-sm">
+        <div class="col">
+            <span class="float-right form-control-xs">Búsqueda:</span>
+        </div>
+        <div class="col">
+            <input type="text" class="form-control form-control-xs" placeholder="Cedula"
+            (keyup.enter)="buscarDepositosFilters()"
+            formControlName="cedula"
+            >
+        </div>
+        <div class="col">
+            <input type="text" class="form-control form-control-xs" placeholder="Nombres"
+            (keyup.enter)="buscarDepositosFilters()"
+            formControlName="nombres"
+            >
+        </div>
+        <div class="col">
+            <input type="text" class="form-control form-control-xs" placeholder="Apellidos"
+            (keyup.enter)="buscarDepositosFilters()"
+            formControlName="apellidos"
+            >
+        </div>
+        <div class="col">
+            <input type="text" class="form-control form-control-xs align-middle" placeholder="Deposito"
+            (keyup.enter)="buscarDepositosFilters()"
+            formControlName="numerodeposito"
+            >
+        </div>
+        <div class="col">
+            <a class="btn btn-sm btn-default float-left align-top form-control-xs" routerLink="list" routerLinkActive="active" (click)="buscarDepositos()"
+                aria-label="Settings">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+</form>
+
+<table class="table table-hover table-sm table-condensed">
     <thead>
         <tr>
             <th>Cedula</th>
@@ -31,10 +69,16 @@
                 {{ deposito.tipodeposito }}
             </td>
             <td>
+                <!--
+                <a [routerLink]="['/edit', deposito.id]" class="btn btn-primary btn-sm fontsize">Edit</a>
+                -->
                 <a 
-                    [routerLink]="['/edit', deposito.id]" class="btn btn-primary btn-sm fontsize"
-                    >Edit</a>
-                </td>
+                    [routerLink]="['/edit', deposito.id]"
+                    class="btn btn-sm btn-default float-left align-top form-control-xs" routerLink="list" routerLinkActive="active" (click)="buscarDepositos()"
+                    aria-label="Settings">
+                    <i class="fa fa-edit" aria-hidden="true"></i>
+                </a>
+            </td>
 
         </tr>
     </tbody>

@@ -130,12 +130,11 @@ export class DepositoCreateComponent implements OnInit {
 
       if (response.deposito && response.deposito.codigodeposito !== null && response.deposito.codigodeposito > 0) {
         this.flashMessagesService.show('El registro del deposito '+  datos.numerodeposito +' del socio ' + this.persona.cedula + 'se realizo correctamente.', { cssClass: 'alert-success', timeout: 2000 });
+        this.buildForm();
       }
       else {
-        this.flashMessagesService.show(response.mensaje, { cssClass: 'alert-danger', timeout: 2000 });
+        this.flashMessagesService.show(response.mensaje, { cssClass: 'alert-danger', timeout: 3000 });
       }
-
-      this.buildForm();
 
     });
 
