@@ -1,0 +1,14 @@
+<ng2-completer input-class="form-control form-control-small" [(ngModel)]="searchStr" [datasource]="dataService"
+    [minSearchLength]="0" [autofocus]="true" [minSearchLength]="0" (selected)="onSelected($event)"
+    [selectOnClick]="true" [inputClass]="'form-control'"></ng2-completer>
+
+<h1>Search cuota</h1>
+<ng2-completer [(ngModel)]="cuotaStr" [datasource]="dataServiceCuotas" [minSearchLength]="1"
+    (selected)="onSelectedCuota($event)" [inputClass]="'form-control input-list'"></ng2-completer>
+
+<h1>Search persona</h1>
+<ng2-completer 
+    [datasource]="dataServiceCedulas" [minSearchLength]="3"
+    (selected)="onSelectedPersona($event)" [inputClass]="'form-control input-list'"
+    [autofocus]="true"
+    ></ng2-completer>

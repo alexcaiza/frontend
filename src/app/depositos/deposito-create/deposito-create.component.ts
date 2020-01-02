@@ -63,7 +63,6 @@ export class DepositoCreateComponent implements OnInit {
     }
 
     this.personasService.readPersonaByCedula(this.cedula).subscribe((persona: Persona) => {
-
       if (persona == null) {
         this.flashMessagesService.show('No se encontro el socio con el numero de cedula: ' + this.cedula + '.', { cssClass: 'alert-danger', timeout: 2000 });
       return;

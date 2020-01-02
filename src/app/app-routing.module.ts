@@ -1,4 +1,7 @@
-import { ExampleComponent } from './example/example.component';
+import { Example4Component } from './examples/example4/example4.component';
+import { Example3Component } from './examples/example3/example3.component';
+import { Example2Component } from './examples/example2/example2.component';
+import { ExampleComponent } from './examples/example/example.component';
 import { DepositoCreateComponent } from './depositos/deposito-create/deposito-create.component';
 import { DepositoUpdateComponent } from './depositos/deposito-update/deposito-update.component';
 import { DepositoListComponent } from './depositos/deposito-list/deposito-list.component';
@@ -13,6 +16,7 @@ import { CreateComponent } from './create/create.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CuotasComponent } from './depositos/cuotas/cuotas.component';
 
 
 const routes: Routes = [
@@ -34,6 +38,18 @@ const routes: Routes = [
     component: ExampleComponent
   },
   {
+    path: 'example2',
+    component: Example2Component
+  },
+  {
+    path: 'example3',
+    component: Example3Component
+  },
+  {
+    path: 'example4',
+    component: Example4Component
+  },
+  {
     path: 'project',
     component: ProjectComponent,
     children: [
@@ -48,6 +64,10 @@ const routes: Routes = [
       {
         path: 'update',
         component: ProjectUpdateComponent
+      },
+      {
+        path: 'cuotas',
+        component: CuotasComponent
       }
     ]
   },
@@ -66,6 +86,10 @@ const routes: Routes = [
       {
         path: 'update',
         component: DepositoUpdateComponent
+      },
+      {
+        path: 'cuotas',
+        component: CuotasComponent
       }
     ]
   }

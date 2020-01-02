@@ -1,3 +1,5 @@
+import { ExampleComponent } from './examples/example/example.component';
+
 import { EventEmitterService } from './servicios/event-emitter.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -5,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { ReactiveFormsModule } from '@angular/forms';
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,11 +28,15 @@ import { DepositoUpdateComponent } from './depositos/deposito-update/deposito-up
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
-//import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 
 import { Ng2CompleterModule } from 'ng2-completer';
-import { ExampleComponent } from './example/example.component';
+
+import { Example2Component } from './examples/example2/example2.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { Example3Component } from './examples/example3/example3.component';
+import { Example4Component } from './examples/example4/example4.component';
+import { CuotasComponent } from './depositos/cuotas/cuotas.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +53,11 @@ import { ExampleComponent } from './example/example.component';
     DepositoListComponent,
     DepositoCreateComponent,
     DepositoUpdateComponent,
-    ExampleComponent
+    ExampleComponent,
+    Example2Component,
+    Example3Component,
+    Example4Component,
+    CuotasComponent
   ],
   imports: [
     BrowserModule,
@@ -54,9 +66,10 @@ import { ExampleComponent } from './example/example.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FlashMessagesModule,
-    //NgxSpinnerModule,
     NgHttpLoaderModule.forRoot(),
-    Ng2CompleterModule
+    Ng2CompleterModule,
+    AutocompleteLibModule,
+    NgbModule
   ],
   providers: [
     FlashMessagesService,

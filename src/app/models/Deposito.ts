@@ -1,4 +1,9 @@
-export interface Deposito {
+import {Injectable} from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class Deposito {
     codigodeposito?: Number;
     numerodeposito: String;
     codigopersona: Number;

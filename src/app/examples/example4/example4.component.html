@@ -1,0 +1,33 @@
+<div class="form-group">
+    <label for="ArtistName">Cuota:</label>
+    <input 
+        id="ArtistName" 
+        type="text" 
+        name="ArtistName" 
+        class="form-control" 
+        [(ngModel)]="cuota.descripcioncuota"
+        [ngbTypeahead]="searchCuota" 
+        [resultFormatter]="resultFormatBandListValue"
+        [inputFormatter]="inputFormatBandListValue" 
+        #instance="ngbTypeahead" 
+        />
+</div>
+<hr>
+<pre>Model: {{ cuota | json }}</pre>
+
+<div class="form-group">
+    <label for="PersonaName">Persona:</label>
+    <input 
+        id="PersonaName" 
+        type="text" 
+        name="PersonaName" 
+        class="form-control" 
+        [(ngModel)]="persona.cedula"
+        [ngbTypeahead]="searchPersona" 
+        [resultFormatter]="resultFormatPersonaListValue"
+        [inputFormatter]="inputFormatPersonaListValue" 
+        #instance2="ngbTypeahead" 
+        />
+</div>
+<hr>
+<pre>Model: {{ persona | json }}</pre>

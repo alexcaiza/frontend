@@ -1,0 +1,140 @@
+<div class="container">
+        <fieldset>
+            <legend>Nuevo pago cuota:</legend>
+            <form [formGroup]="formGroup">
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="txtCuota" class="col-sm-2 col-form-label col-form-label-sm">Cuota:</label>
+                        <div class="input-group col-sm-10">
+                            <input 
+                                class="form-control form-control-sm py-2 border-right-0 border" 
+                                name="txtCuota"
+                                id="txtCuota" 
+                                type="text"                             
+                                formControlName="cuota"
+                                [ngbTypeahead]="searchCuota" 
+                                [resultFormatter]="resultFormatCuotaListValue"
+                                [inputFormatter]="inputFormatCuotaListValue" 
+                                (selectItem)="selectedCuota($event)"
+                                (focus)="focusCuota$.next($event.target.value)"
+                                (click)="clickCuota$.next($event.target.value)"
+                                #instanceCuota="ngbTypeahead" 
+                                >                        
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="textValorCuota" class="col-sm-4 col-form-label col-form-label-sm">Valor cuota:</label>
+                        <div class="input-group col-sm-8">
+                            {{ modelCuota?.valorcuota }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="example-search-input" class="col-sm-2 col-form-label col-form-label-sm">Cedula:</label>
+                        <div class="input-group col-sm-10">
+                            <input 
+                                class="form-control form-control-sm py-2 border-right-0 border" 
+                                name="txtCedula"
+                                id="txtCedula" 
+                                type="text" 
+                                formControlName="persona"
+                                [ngbTypeahead]="searchPersona" 
+                                [resultFormatter]="resultFormatPersonaListValue"
+                                [inputFormatter]="inputFormatPersonaListValue" 
+                                (selectItem)="selectedPersona($event)"
+                                >
+                            
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="textPersonaCedula" class="col-sm-4 col-form-label col-form-label-sm">Nombre:</label>
+                        <div class="input-group col-sm-8">
+                            {{ modelPersona?.primernombre }} {{ modelPersona?.segundonombre }} {{ modelPersona?.primerapellido }} {{ modelPersona?.segundoapellido }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="txtLote" class="col-sm-2 col-form-label col-form-label-sm">Lote:</label>
+                        <div class="input-group col-sm-10">
+                            <input 
+                                class="form-control form-control-sm py-2 border-right-0 border" 
+                                name="txtLote"
+                                id="txtLote" 
+                                type="text"                             
+                                formControlName="lote"
+                                [ngbTypeahead]="searchLote" 
+                                [resultFormatter]="resultFormatLoteListValue"
+                                [inputFormatter]="inputFormatLoteListValue" 
+                                (selectItem)="selectedLote($event)"
+                                (focus)="focus$.next($event.target.value)"
+                                (click)="click$.next($event.target.value)"
+                                #instanceLote="ngbTypeahead"
+                                >
+                            
+                        </div>
+                    </div>                    
+                </div>
+
+                <ng-template #rt let-r="result" let-t="term" style="size: 10px;">
+                    <tr style="font-size: 11px;">
+                        <td style="width: 100px; margin-left: 10px; margin-right: 10px;"> <span style="color: #FF7043"> {{ r.fechadeposito | date:"yyyy-MM-dd" }} </span> </td>                    
+                        <td style="width: 60px; margin-left: 10px; margin-right: 10px;"> {{ r.numerodeposito }} </td>
+                        <td style="width: 60px; margin-left: 10px; margin-right: 10px;"> {{ r.valordeposito }} <span>$</span> </td>
+                    </tr>
+                </ng-template>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="txtDeposito" class="col-sm-2 col-form-label col-form-label-sm">Deposito:</label>
+                        <div class="input-group col-sm-10">
+                            <input 
+                                class="form-control form-control-sm py-2 border-right-0 border" 
+                                name="txtDeposito"
+                                id="txtDeposito" 
+                                type="text"                             
+                                formControlName="deposito"
+                                [ngbTypeahead]="searchDeposito" 
+                                [resultTemplate]="rt"
+                                [inputFormatter]="inputFormatDepositoListValue" 
+                                (selectItem)="selectedDeposito($event)"
+                                (focus)="focusDeposito$.next($event.target.value)"
+                                (click)="clickDeposito$.next($event.target.value)"
+                                #instanceDeposito="ngbTypeahead"
+                                >
+                            
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label for="textValorDeposito" class="col-sm-4 col-form-label col-form-label-sm">Valor deposito:</label>
+                            <div class="input-group col-sm-8">
+                                {{ modelDeposito?.valordeposito }}
+                            </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputValorPagoCuotaLote" class="col-sm-5 col-form-label col-form-label-sm">Valor pago cuota:</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control form-control-sm" id="inputValorPagoCuotaLote"
+                                placeholder="Valor pago cuota" formControlName="valorpagocuotalote">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-sm btn-primary" (click)="savePagoCuotaLote()">Guardar</button>
+                        <button type="submit" class="btn btn-sm btn-danger" (click)="savePagoCuotaLote()">Cancelar</button>
+                    </div>
+                </div>
+ 
+                
+
+            </form>
+        </fieldset>
+    </div>

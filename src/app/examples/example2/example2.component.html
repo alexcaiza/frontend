@@ -1,0 +1,22 @@
+<div class="ng-autocomplete">
+        <ng-autocomplete 
+          [data]="cuotas"
+          [searchKeyword]="keyword"
+          (selected)='selectEvent($event)'
+          (inputChanged)='onChangeSearch($event)'
+          (inputFocused)='onFocused($event)'
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate"
+          placeHolder="Enter the Cuota Name"
+          >
+          
+        </ng-autocomplete>
+         
+        <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item.descripcioncuota"></a>
+        </ng-template>
+         
+        <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+        </ng-template>
+        </div>
