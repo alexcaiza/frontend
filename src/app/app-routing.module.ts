@@ -1,3 +1,4 @@
+import { PagosComponent } from './depositos/pagos/pagos.component';
 import { Example4Component } from './examples/example4/example4.component';
 import { Example3Component } from './examples/example3/example3.component';
 import { Example2Component } from './examples/example2/example2.component';
@@ -34,42 +35,8 @@ const routes: Routes = [
     component: IndexComponent
   },
   {
-    path: 'example',
-    component: ExampleComponent
-  },
-  {
-    path: 'example2',
-    component: Example2Component
-  },
-  {
-    path: 'example3',
-    component: Example3Component
-  },
-  {
-    path: 'example4',
-    component: Example4Component
-  },
-  {
-    path: 'project',
-    component: ProjectComponent,
-    children: [
-      {
-        path: 'list',
-        component: ProjectListComponent
-      },
-      {
-        path: 'create',
-        component: ProjectCreateComponent
-      },
-      {
-        path: 'update',
-        component: ProjectUpdateComponent
-      },
-      {
-        path: 'cuotas',
-        component: CuotasComponent
-      }
-    ]
+    path: 'pagos',
+    component: PagosComponent
   },
   {
     path: 'depositos',

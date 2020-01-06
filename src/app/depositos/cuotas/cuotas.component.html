@@ -76,14 +76,21 @@
                                 >
                             
                         </div>
-                    </div>                    
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="textPersonaCedula" class="col-sm-4 col-form-label col-form-label-sm">Dueño:</label>
+                        <div class="input-group col-sm-8">
+                            {{ modelLote?.primernombre }} {{ modelLote?.segundonombre }} {{ modelLote?.primerapellido }} {{ modelLote?.segundoapellido }}
+                        </div>
+                    </div>                 
                 </div>
 
-                <ng-template #rt let-r="result" let-t="term" style="size: 10px;">
+                <ng-template #rt let-r="result" let-t="term" style="size: 11px;">
                     <tr style="font-size: 11px;">
                         <td style="width: 100px; margin-left: 10px; margin-right: 10px;"> <span style="color: #FF7043"> {{ r.fechadeposito | date:"yyyy-MM-dd" }} </span> </td>                    
-                        <td style="width: 60px; margin-left: 10px; margin-right: 10px;"> {{ r.numerodeposito }} </td>
+                        <td style="width: 60px; margin-left: 10px; margin-right: 10px;" title=" {{ r.codigodeposito }} "> {{ r.numerodeposito }} </td>
                         <td style="width: 60px; margin-left: 10px; margin-right: 10px;"> {{ r.valordeposito }} <span>$</span> </td>
+                        <td style="width: 60px; margin-left: 10px; margin-right: 10px;"> {{ r.valorutilizado }} <span>$</span> </td>
                     </tr>
                 </ng-template>
 
@@ -124,12 +131,18 @@
                                 placeholder="Valor pago cuota" formControlName="valorpagocuotalote">
                         </div>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label for="textValorPagoCuotaLote" class="col-sm-4 col-form-label col-form-label-sm">Valor deposito:</label>
+                        <div class="input-group col-sm-8">
+                                {{ valorpagocuotaloteTotal }} / {{ modelCuota?.valorcuota }}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-sm btn-primary" (click)="savePagoCuotaLote()">Guardar</button>
-                        <button type="submit" class="btn btn-sm btn-danger" (click)="savePagoCuotaLote()">Cancelar</button>
+                        <button type="submit" class="btn btn-sm btn-danger" (click)="buildForm()">Cancelar</button>
                     </div>
                 </div>
  

@@ -37,6 +37,8 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { Example3Component } from './examples/example3/example3.component';
 import { Example4Component } from './examples/example4/example4.component';
 import { CuotasComponent } from './depositos/cuotas/cuotas.component';
+import { PagosComponent } from './depositos/pagos/pagos.component';
+import { ModalpagoComponent } from './depositos/modalpago/modalpago.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { CuotasComponent } from './depositos/cuotas/cuotas.component';
     Example2Component,
     Example3Component,
     Example4Component,
-    CuotasComponent
+    CuotasComponent,
+    PagosComponent,
+    ModalpagoComponent
   ],
   imports: [
     BrowserModule,

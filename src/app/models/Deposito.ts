@@ -4,15 +4,17 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class Deposito {
-    codigodeposito?: Number;
+    codigodeposito: Number;
     numerodeposito: String;
     codigopersona: Number;
     fechadeposito: Date;
     valordeposito: Number;
+    valorutilizado: Number;
     tipodeposito: String;
     cedula: String;
     primernombre: String;
     segundonombre: String;
     primerapellido: String;
     segundoapellido: String;
+    estado: String;
   }

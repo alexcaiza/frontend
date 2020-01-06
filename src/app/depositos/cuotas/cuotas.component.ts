@@ -33,6 +33,8 @@ export class CuotasComponent implements OnInit {
   codigodeposito: Number;
   codigocuota: Number;
 
+  valorpagocuotaloteTotal: Number;
+
   public formGroup: FormGroup;
 
   @ViewChild('instanceLote', {static: true}) 
@@ -69,6 +71,8 @@ export class CuotasComponent implements OnInit {
     this.modelDeposito = null;
     this.modelPersona = null;
     this.modelLote = null;
+
+    this.valorpagocuotaloteTotal = null;
     
     this.formGroup = this.formBuilder.group({
       persona: ['', Validators.required],
@@ -101,6 +105,7 @@ export class CuotasComponent implements OnInit {
     this.codigodeposito = item.item.codigodeposito;
     console.log(this.codigodeposito);
     this.modelDeposito = item.item;
+    console.log(this.modelDeposito);
   }
 
   selectedLote(item){
@@ -109,6 +114,18 @@ export class CuotasComponent implements OnInit {
     this.codigolote = item.item.codigolote;
     console.log(this.codigolote);
     this.modelLote = item.item;
+
+    this.valorpagocuotaloteTotal = 0;
+
+    this.cuotasService.consultarPagoCuotaLoteSum(this.codigocuota, this.codigolote).subscribe((data: any) => {
+      console.log(data);
+      console.log(data.data);
+      console.log(data.data.valorpagocuotalote);
+      if (data && data.data && data.data.valorpagocuotalote) {
+        this.valorpagocuotaloteTotal = data.data.valorpagocuotalote;
+      }
+    });
+
   }
 
   savePagoCuotaLote(){
@@ -116,35 +133,90 @@ export class CuotasComponent implements OnInit {
 
     console.log(this.formGroup.value);
 
-    const deposito = this.formGroup.get("deposito").value;
-    console.log('deposito: ' + deposito);
-
-    if (deposito == null || deposito === '') {
-      this.flashMessagesService.show('Ingrese el numero del deposito.', { cssClass: 'alert-danger', timeout: 2000 });
-      return;
-    }
-
-    const valorpagocuotalote = this.formGroup.get("valorpagocuotalote").value;
-    console.log('valorpagocuotalote: ' + valorpagocuotalote);
-
-    if (valorpagocuotalote == null || valorpagocuotalote === '') {
-      this.flashMessagesService.show('Ingrese el valor del pago de la cuota.', { cssClass: 'alert-danger', timeout: 2000 });
-      return;
-    }
-
-    const persona = this.formGroup.get("persona").value;
-    console.log('persona: ' + persona);
-
-    if (persona == null || persona === '') {
-      this.flashMessagesService.show('Ingrese la cedula de la persona.', { cssClass: 'alert-danger', timeout: 2000 });
-      return;
-    }
-
+    // VALIDA LOS DATOS DE LA CUOTA
     const cuota = this.formGroup.get("cuota").value;
     console.log('cuota: ' + cuota);
 
     if (cuota == null || cuota === '') {
-      this.flashMessagesService.show('Ingrese el tipo de cuota a pagar.', { cssClass: 'alert-danger', timeout: 2000 });
+      this.flashMessagesService.show('Ingrese el tipo de cuota a pagar.', { cssClass: 'alert-danger', timeout: 5000 });
+      return;
+    }
+
+    // VALIDA LOS DATOS DE LA PERSONA
+    const persona = this.formGroup.get("persona").value;
+    console.log('persona: ' + persona);
+
+    if (persona == null || persona === '') {
+      this.flashMessagesService.show('Ingrese la cedula de la persona.', { cssClass: 'alert-danger', timeout: 5000 });
+      return;
+    }
+
+    // VALIDA LOS DATOS DEL LOTE
+    const lote = this.formGroup.get("lote").value;
+    console.log('lote: ' + lote);
+
+    if (lote == null || lote === '') {
+      this.flashMessagesService.show('Ingrese el lote para pagar la cuota pendiente.', { cssClass: 'alert-danger', timeout: 5000 });
+      return;
+    }
+
+    // VALIDA LOS DATOS DEL DEPOSITO
+    const deposito = this.formGroup.get("deposito").value;
+    console.log('deposito: ' + deposito);
+
+    if (deposito == null || deposito === '') {
+      this.flashMessagesService.show('Ingrese el numero del deposito.', { cssClass: 'alert-danger', timeout: 5000 });
+      return;
+    }
+
+    // VALIDA SI EL DEPOSITO TIENE SALDO DISPONIBLE PARA PAGAR LA COUTA
+    let valordeposito: Number = Number(deposito.valordeposito);
+    let valorutilizado: Number = Number(deposito.valorutilizado);
+    if (valorutilizado >= valordeposito) {
+      this.flashMessagesService.show(
+        'El deposito ('+deposito.numerodeposito+') del socio ('+persona.cedula+') esta utilizado completamente.', 
+        { cssClass: 'alert-warning', timeout: 5000 }
+        );
+      return;
+    }
+
+    // VALIDA EL VALOR PAGO CUOTA
+    const valorpagocuotalote = this.formGroup.get("valorpagocuotalote").value;
+    console.log('valorpagocuotalote: ' + valorpagocuotalote);
+
+    if (valorpagocuotalote == null || valorpagocuotalote === '') {
+      this.flashMessagesService.show('Ingrese el valor del pago de la cuota.', { cssClass: 'alert-danger', timeout: 5000 });
+      return;
+    }
+
+    // VALIDA EL VALOR PAGO CUOTA NO SEA MAYOR AL VALOR DE LA CUOTA
+    let valorpagocuotaloteN: Number = Number(valorpagocuotalote);
+    let valorcuotaN: Number = Number(cuota.valorcuota);
+
+    if (valorpagocuotaloteN > valorcuotaN) {
+      this.flashMessagesService.show('El valor del pago de la cuota no puede ser mayor al valor de la cuota ('+valorpagocuotaloteN+' - '+valorcuotaN+').', { cssClass: 'alert-danger', timeout: 5000 });
+      return;
+    }
+
+    // VALIDA EL VALOR PAGO CUOTA PENDIENTE
+    let valorpagopendienteN = Number(valorcuotaN) - Number(this.valorpagocuotaloteTotal);
+    
+    if (valorpagopendienteN > 0 && valorpagocuotaloteN > valorpagopendienteN) {
+      this.flashMessagesService.show('El valor del pago de la cuota no puede ser mayor al valor pendiente de la cuota ('+valorpagocuotaloteN+' - '+valorpagopendienteN+').', { cssClass: 'alert-danger', timeout: 5000 });
+      return;
+    }
+
+    // VALIDA SI EXISTE PAGO PENDIENTE DE LA CUOTA
+    var valorCuota: Number = Number(cuota.valorcuota);
+
+    console.log('valorCuota: ' + valorCuota);
+    console.log('valorpagocuotaloteTotal: ' + this.valorpagocuotaloteTotal);
+    
+    if (this.valorpagocuotaloteTotal >= valorCuota) {
+      this.flashMessagesService.show(
+        'La cuota ('+cuota.descripcioncuota+') del lote ('+lote.codigoreferencia+') esta pagada completamente.', 
+        { cssClass: 'alert-warning', timeout: 5000 }
+        );
       return;
     }
 

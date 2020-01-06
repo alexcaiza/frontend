@@ -1,0 +1,105 @@
+<ng-template #childmodalpago let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Pago cuota deposito</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" aria-hidden="true">
+        <span aria-hidden="true">&times;</span>
+      </button>
+	</div>
+	<form [formGroup]="formModalPago" (ngSubmit)="savePagoCuotaLote()">
+		<div class="modal-body">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="textValorCuota" class="col-sm-4 col-form-label col-form-label-sm">Cuota:</label>
+                    <div class="input-group col-sm-8">
+                        {{ pago.descripcioncuota }}
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="textValorCuota" class="col-sm-4 col-form-label col-form-label-sm">Valor cuota:</label>
+                    <div class="input-group col-sm-8">
+                        {{ pago.codigocuota }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="textValorCuota" class="col-sm-4 col-form-label col-form-label-sm">Lote:</label>
+                    <div class="input-group col-sm-8">
+                            {{pago.codigoreferencia}}
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="textValorCuota" class="col-sm-4 col-form-label col-form-label-sm">Dueño:</label>
+                    <div class="input-group col-sm-8">
+                            {{ this.pago.primerapellido }} {{ this.pago.segundoapellido }} {{ this.pago.primernombre }} {{ this.pago.segundonombre }}
+                    </div>
+                </div>
+            </div>
+            <ng-template #rt let-r="result" let-t="term" style="size: 11px;">
+                <tr style="font-size: 11px;">
+                    <td style="width: 100px; margin-left: 10px; margin-right: 10px;"> <span style="color: #FF7043"> {{ r.fechadeposito | date:"yyyy-MM-dd" }} </span> </td>                    
+                    <td style="width: 60px; margin-left: 10px; margin-right: 10px;" title=" {{ r.codigodeposito }} "> {{ r.numerodeposito }} </td>
+                    <td style="width: 60px; margin-left: 10px; margin-right: 10px;"> {{ r.valordeposito }} <span>$</span> </td>
+                    <td style="width: 60px; margin-left: 10px; margin-right: 10px;"> {{ r.valorutilizado }} <span>$</span> </td>
+                </tr>
+            </ng-template>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="txtDeposito" class="col-sm-2 col-form-label col-form-label-sm">Deposito:</label>
+                    <div class="input-group col-sm-10">
+                        <input 
+                            class="form-control form-control-sm py-2 border-right-0 border" 
+                            name="txtDeposito"
+                            id="txtDeposito" 
+                            type="text"                             
+                            formControlName="deposito"
+                            [ngbTypeahead]="searchDeposito" 
+                            [resultTemplate]="rt"
+                            [inputFormatter]="inputFormatDepositoListValue" 
+                            (selectItem)="selectedDeposito($event)"
+                            (focus)="focusDeposito$.next($event.target.value)"
+                            (click)="clickDeposito$.next($event.target.value)"
+                            #instanceDeposito="ngbTypeahead"
+                            >
+                        
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="textValorDeposito" class="col-sm-4 col-form-label col-form-label-sm">Valor deposito:</label>
+                    <div class="input-group col-sm-8">
+                        {{ modelDeposito?.valordeposito }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputValorPagoCuotaLote" class="col-sm-5 col-form-label col-form-label-sm">Valor pago cuota:</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control form-control-sm" id="inputValorPagoCuotaLote"
+                            placeholder="Valor pago cuota" formControlName="valorpagocuotalote">
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="textValorPagoCuotaLote" class="col-sm-4 col-form-label col-form-label-sm">Valor deposito:</label>
+                    <div class="input-group col-sm-8">
+                            {{ valorpagocuotaloteTotal }} / {{ pago.valorcuota }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-row" *ngIf="mensaje != ''">
+                <div class="form-group col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 10px;">
+                        {{ mensaje }}
+                    </div>
+                        
+                </div>
+            </div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-outline-primary btn-sm ml-1">Guardar</button>
+			<button type="button" class="btn btn-outline-danger btn-sm" (click)="hideModal()">Cancelar</button>
+		</div>
+	</form>
+</ng-template>
