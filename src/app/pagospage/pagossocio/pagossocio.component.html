@@ -1,0 +1,144 @@
+<form [formGroup]="formBusqueda">
+    <div class="form-row form-row-sm">
+
+        <div class="col-sm-2">
+            <label class="labelItem">Cedula:</label>
+            <input 
+                class="form-control form-control-xs py-2 border" 
+                name="txtCedula"
+                id="txtCedula" 
+                type="text"                             
+                formControlName="persona"
+                [ngbTypeahead]="searchPersona" 
+                [resultFormatter]="resultFormatPersonaListValue"
+                [inputFormatter]="inputFormatPersonaListValue" 
+                (selectItem)="selectedPersona($event)"
+                (focus)="focusPersona$.next($event.target.value)"
+                (click)="clickPersona$.next($event.target.value)"
+                #instancePersona="ngbTypeahead" 
+                placeholder="Cedula"
+                >
+        </div>
+        
+        <div class="col-sm-1">
+                <label class="labelItem">Nombre:</label>
+            <input 
+                class="form-control form-control-xs py-2 border" 
+                name="txtNombre"
+                id="txtNombre" 
+                type="text"                             
+                formControlName="nombresocio"
+                placeholder="Nombre"
+                >
+        </div>
+
+        <div class="col-sm-1">
+                <label class="labelItem">Apellido:</label>
+            <input 
+                class="form-control form-control-xs py-2 border" 
+                name="txtApellido"
+                id="txtApellido" 
+                type="text"                             
+                formControlName="apellidosocio"
+                placeholder="Apellido"
+                >
+        </div>
+
+        <div class="col-sm-2">
+                <label class="labelItem">Lote:</label>
+            <input 
+                class="form-control form-control-xs py-2 border" 
+                name="txtLote"
+                id="txtLote" 
+                type="text"                             
+                formControlName="lote"
+                [ngbTypeahead]="searchLote" 
+                [resultFormatter]="resultFormatLoteListValue"
+                [inputFormatter]="inputFormatLoteListValue" 
+                (selectItem)="selectedLote($event)"
+                (focus)="focusLote$.next($event.target.value)"
+                (click)="clickLote$.next($event.target.value)"
+                #instanceCuota="ngbTypeahead" 
+                placeholder="Seleccione lote"
+                >
+        </div>
+
+        <div class="col-sm-3">
+                <label class="labelItem">Cuota:</label>
+            <input 
+                class="form-control form-control-xs py-2 border" 
+                name="txtCuota"
+                id="txtCuota" 
+                type="text"                             
+                formControlName="cuota"
+                [ngbTypeahead]="searchCuota" 
+                [resultFormatter]="resultFormatCuotaListValue"
+                [inputFormatter]="inputFormatCuotaListValue" 
+                (selectItem)="selectedCuota($event)"
+                (focus)="focusCuota$.next($event.target.value)"
+                (click)="clickCuota$.next($event.target.value)"
+                #instanceCuota="ngbTypeahead" 
+                placeholder="Seleccione cuota"
+                >
+        </div>
+        
+        <div class="col-sm-2">
+            <button class="btn btn-primary form-control-xs" 
+                (click)="buscarCuotasLotesFilters()">
+                <span class="fa fa-search"></span> Buscar
+            </button>
+        </div>
+    </div>
+</form>
+<div style="margin-top: 1px;">
+    <table class="table table-hover table-sm table-bordered table-condensed table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>Nombre</th>
+                <th>Cedula</th>
+                <th>Lote</th>
+                <th>Cuota</th>
+                <th>Valor</th>
+                <th>Pago</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let pago of pagos">
+                <td>
+                    {{ pago.primerapellido }} {{ pago.segundoapellido }} {{ pago.primernombre }} {{ pago.segundonombre }}
+                </td>
+                <td>{{ pago.cedula }}</td>
+                <td>
+                    {{ pago.codigoreferencia }}
+                </td>
+                <td>
+                    {{ pago.descripcioncuota }}
+                </td>
+                <td>
+                    {{ pago.valorcuota }}
+                </td>
+                <td>
+                    {{ pago.valorpagocuotalote }}
+                </td>
+                <td>
+                    <!--
+                    <a [routerLink]="['/edit', deposito.id]" class="btn btn-primary btn-sm fontsize">Edit</a>
+                    -->
+                    <a 
+                        class="btn btn-sm btn-default float-left align-top form-control-xs" 
+                        (click)="openModalPago(pago)"
+                        aria-label="Settings">
+                        <i class="fa fa-edit" aria-hidden="true"></i>
+                    </a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Modal pago cuota lote -->
+<app-modalpago></app-modalpago>

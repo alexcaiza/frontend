@@ -39,6 +39,8 @@ import { Example4Component } from './examples/example4/example4.component';
 import { CuotasComponent } from './depositos/cuotas/cuotas.component';
 import { PagosComponent } from './depositos/pagos/pagos.component';
 import { ModalpagoComponent } from './depositos/modalpago/modalpago.component';
+import { PagospageComponent } from './pagospage/pagospage.component';
+import { PagossocioComponent } from './pagospage/pagossocio/pagossocio.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { ModalpagoComponent } from './depositos/modalpago/modalpago.component';
     Example4Component,
     CuotasComponent,
     PagosComponent,
-    ModalpagoComponent
+    ModalpagoComponent,
+    PagospageComponent,
+    PagossocioComponent
   ],
   imports: [
     BrowserModule,

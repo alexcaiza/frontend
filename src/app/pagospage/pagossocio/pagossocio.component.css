@@ -1,0 +1,33 @@
+.navbar-nav {
+    font-size: 0.7rem;
+}
+
+.navbar {
+    padding: 0 1rem;
+}
+
+.navbar-nav .nav-item:first-child .nav-link {
+    padding-left: 1px;
+}    
+
+.flash-messages {
+    font-size: 0.7rem;
+}
+
+.table-condensed{
+    font-size: 10px;
+}
+
+.table-condensed a.fontsize {
+    font-size: 9px;
+}
+
+.flash-messages {
+    font-size: 0.7rem;
+}
+
+label.labelItem {
+    font-size:10px;
+    color: darkcyan;
+    font-weight: bold;
+}

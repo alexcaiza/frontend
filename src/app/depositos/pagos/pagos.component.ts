@@ -50,13 +50,7 @@ export class PagosComponent implements OnInit {
   }
 
   createFormBusqueda() {
-    this.formBusqueda = this.formBuilder.group({
-      cedula: [''],
-      nombres: [''],
-      apellidos: [''],
-      numerodeposito: ['']
-    });
-
+    
     this.modelCuota = null;
     
     this.formBusqueda = this.formBuilder.group({

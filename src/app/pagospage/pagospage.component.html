@@ -1,0 +1,29 @@
+<div>
+    <div class="row">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <a class="navbar-brand" href="#">Pagos cuotas</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" routerLink="/pagospage/pagos" routerLinkActive="active">Por cuotas
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/pagospage/pagossocio" routerLinkActive="active">
+                            Por socios
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                    </li>                    
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

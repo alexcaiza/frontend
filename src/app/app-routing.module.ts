@@ -1,3 +1,5 @@
+import { PagossocioComponent } from './pagospage/pagossocio/pagossocio.component';
+import { PagospageComponent } from './pagospage/pagospage.component';
 import { PagosComponent } from './depositos/pagos/pagos.component';
 import { Example4Component } from './examples/example4/example4.component';
 import { Example3Component } from './examples/example3/example3.component';
@@ -35,10 +37,6 @@ const routes: Routes = [
     component: IndexComponent
   },
   {
-    path: 'pagos',
-    component: PagosComponent
-  },
-  {
     path: 'depositos',
     component: DepositoComponent,
     children: [
@@ -57,6 +55,20 @@ const routes: Routes = [
       {
         path: 'cuotas',
         component: CuotasComponent
+      }
+    ]
+  },
+  {
+    path: 'pagospage',
+    component: PagospageComponent,
+    children: [
+      {
+        path: 'pagos',
+        component: PagosComponent
+      },
+      {
+        path: 'pagossocio',
+        component: PagossocioComponent
       }
     ]
   }

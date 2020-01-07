@@ -19,3 +19,13 @@
 .modal-header h4 {
     font-size: 12px;
 }
+
+div.labelItem {
+    font-size:10px;
+    color: darkcyan;
+}
+
+.app-modal-window .modal-dialog {
+    width: 700px;
+  }
+
