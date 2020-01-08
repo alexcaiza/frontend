@@ -25,8 +25,8 @@ export class CuotasService {
     return this.httpClient.get<Cuota[]>(`${this.PHP_API_SERVER}/read.php${this.XDEBUG_SESSION_START1}`);
   }
 
-  readPersonas(): Observable<Persona[]> {
-    return this.httpClient.get<Persona[]>(`${this.PHP_API_SERVER}/readpersonas.php${this.XDEBUG_SESSION_START1}`);
+  readPersonas(textSearch): Observable<Persona[]> {
+    return this.httpClient.get<Persona[]>(`${this.PHP_API_SERVER}/readpersonas.php${this.XDEBUG_SESSION_START1}&textSearch=${textSearch}`);
   }
 
   readCuota(): Observable<Cuota[]> {

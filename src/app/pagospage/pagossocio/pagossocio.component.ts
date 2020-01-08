@@ -125,6 +125,13 @@ export class PagossocioComponent implements OnInit {
     params.codigolote = this.codigolote;
     params.codigocuota = this.codigocuota;
 
+    if (this.formBusqueda.get("apellidosocio").value != null && this.formBusqueda.get("apellidosocio").value !== '') {
+      params.apellidosocio = this.formBusqueda.get("apellidosocio").value;
+    }
+    if (this.formBusqueda.get("nombresocio").value != null && this.formBusqueda.get("nombresocio").value !== '') {
+      params.nombresocio = this.formBusqueda.get("nombresocio").value;
+    }
+
     this.cuotasService.consultarCuotasLotes2(params).subscribe((response: any) => {
       
       console.log(response);
@@ -177,7 +184,7 @@ export class PagossocioComponent implements OnInit {
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
         switchMap( (searchText) => 
         //this.albumService.artistLookup(searchText)
-        this.cuotasService.readPersonas()
+        this.cuotasService.readPersonas(searchText)
       )
     );
 

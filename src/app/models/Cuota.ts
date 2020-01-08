@@ -10,6 +10,7 @@ export class Cuota {
     valorcuota: Number;
     fechainicio: Date;
     fechafin: Date;
+    ordencuota: Number;
 
     //datos del lote
     codigolote: Number;
