@@ -259,7 +259,7 @@ export class CuotasComponent implements OnInit {
         // switchMap allows returning an observable rather than maps array
         switchMap( (searchText) => 
           //this.albumService.artistLookup(searchText)
-          this.cuotasService.readPersonas()
+          this.cuotasService.readPersonas(searchText)
          )           
     );                 
   }

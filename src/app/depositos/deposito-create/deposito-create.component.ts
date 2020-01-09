@@ -1,9 +1,13 @@
+import { CuotasService } from './../../servicios/cuotas/cuotas.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Persona } from './../../models/Persona';
 import { PersonasService } from './../../servicios/personas/personas.service';
 import { DepositosService } from './../../servicios/depositos/depositos.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { Observable, Subject, merge } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, catchError, map, filter  } from 'rxjs/operators';
 
 @Component({
   selector: 'app-deposito-create',
@@ -16,14 +20,28 @@ export class DepositoCreateComponent implements OnInit {
 
   //persona: any = {};
 
+  socios: Array<Persona> = [];
+  socio: Persona = new Persona();
+
+  modelSocio: any;
+
+  codigosocio: Number;
+
   cedula: string;
   persona: Persona;
+
+  @ViewChild('instanceSocio', {static: true}) 
+  instancePersona: NgbTypeahead;
+
+  focusSocio$ = new Subject<Persona>();
+  clickSocio$ = new Subject<Persona>();
 
   constructor(
     private formBuilder: FormBuilder,
     private depositosService: DepositosService,
     private personasService: PersonasService,
     public flashMessagesService: FlashMessagesService,
+    private cuotasService: CuotasService
     ) { }
 
   ngOnInit() {
@@ -44,6 +62,7 @@ export class DepositoCreateComponent implements OnInit {
       fechadeposito: [today, Validators.required],
       tipodeposito: ['', Validators.required],
       numerodeposito: ['', Validators.required],
+      socio: ['', Validators.required],
     });
   }
 
@@ -137,6 +156,49 @@ export class DepositoCreateComponent implements OnInit {
 
     });
 
+  }
+
+  searchSocio = (text$: Observable<string>) => {
+    console.log('text$:' + text$);
+    
+    const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+    const clicksWithClosedPopup$ = this.clickSocio$.pipe(filter(() => !this.instancePersona.isPopupOpen()));
+    const inputFocus$ = this.focusSocio$;
+
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+        switchMap( (searchText) => {
+          let params: Persona = new Persona();
+          params.primerapellido = "" + searchText;
+          return this.cuotasService.readPersonas2(params)
+        }
+      )
+    );
+  }
+
+  selectedSocio(item){
+    this.codigosocio = item.item.codigopersona;
+    
+    console.log(this.codigosocio);
+    
+    this.modelSocio = item.item;
+
+    this.socios.push(item.item);
+
+    console.log(this.socios);
+
+    this.formGroup.patchValue({
+      socio: null
+    });
+  }
+
+  resultFormatSocioListValue(value: any) {            
+    return value.cedula;
+  } 
+  
+  inputFormatSocioListValue(value: any)   {
+    if(value.cedula)
+      return value.cedula
+    return value;
   }
 
 }

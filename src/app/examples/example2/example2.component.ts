@@ -33,7 +33,7 @@ export class Example2Component implements OnInit {
 
   buscarPersonas() {
     console.log('METODO: ExampleComponent.buscarPersonas()');
-    this.cuotasService.readPersonas().subscribe((personas: Persona[]) => {
+    this.cuotasService.readPersonas('').subscribe((personas: Persona[]) => {
       this.personas = personas;
       console.log(this.personas);
       this.flashMessagesService.show('La busqueda de personas se realizo correctamente.', { cssClass: 'alert-success', timeout: 4000 });
