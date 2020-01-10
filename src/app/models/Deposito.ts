@@ -1,3 +1,4 @@
+import { Persona } from './Persona';
 import {Injectable} from '@angular/core';
 
 @Injectable({
@@ -17,4 +18,5 @@ export class Deposito {
     primerapellido: String;
     segundoapellido: String;
     estado: String;
+    socios: Persona[];
   }

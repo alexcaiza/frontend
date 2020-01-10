@@ -10,18 +10,18 @@ export class DepositosService {
 
   PHP_API_SERVER = "http://127.0.0.1:80/angular-php-app/backend/depositos";
 
-  //XDEBUG_SESSION_START = "?XDEBUG_SESSION_START=ECLIPSE_DBGP&KEY=15764311442171";
-  XDEBUG_SESSION_START = "";
+  XDEBUG_SESSION_START_1 = "?x=1";
+  XDEBUG_SESSION_START_2 = "?XDEBUG_SESSION_START=ECLIPSE_DBGP";
   
   constructor(private httpClient: HttpClient) {
   }
 
   readDepositos(): Observable<Deposito[]> {
-    return this.httpClient.get<Deposito[]>(`${this.PHP_API_SERVER}/read.php${this.XDEBUG_SESSION_START}`);
+    return this.httpClient.get<Deposito[]>(`${this.PHP_API_SERVER}/read.php${this.XDEBUG_SESSION_START_1}`);
   }
 
   createDeposito(deposito: Deposito): Observable<Deposito> {
-    return this.httpClient.post<Deposito>(`${this.PHP_API_SERVER}/create.php${this.XDEBUG_SESSION_START}`, deposito);
+    return this.httpClient.post<Deposito>(`${this.PHP_API_SERVER}/create.php${this.XDEBUG_SESSION_START_1}`, deposito);
   }
 
   updateDeposito(deposito: Deposito) {
@@ -37,7 +37,6 @@ export class DepositosService {
   }
 
   updateDeposito2(name, price, id) {
-    
     console.log("Metodo: updateDeposito2()");
 
     const obj = {
@@ -48,9 +47,6 @@ export class DepositosService {
 
     console.log(obj);
 
-    this
-      .httpClient
-      .post(`${this.PHP_API_SERVER}/update.php/${id}`, obj)
-      .subscribe(res => console.log('Done'));
+    this.httpClient.post(`${this.PHP_API_SERVER}/update.php/${id}`, obj).subscribe(res => console.log('Done'));
   }
 }

@@ -42,6 +42,7 @@ export class CuotasService {
   }
 
   readDeposito(codigopersona): Observable<Deposito[]> {
+    console.log('METODO: readDeposito(codigopersona)');
     return this.httpClient.get<Deposito[]>(`${this.PHP_API_SERVER}/read_depositos_persona.php${this.XDEBUG_SESSION_START_1}&codigopersona=${codigopersona}`);
   }
 

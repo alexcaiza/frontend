@@ -16,9 +16,7 @@ import { debounceTime, distinctUntilChanged, switchMap, catchError, map, filter 
 })
 export class DepositoCreateComponent implements OnInit {
 
-  public formGroup: FormGroup;
-
-  //persona: any = {};
+  formGroup: FormGroup;
 
   socios: Array<Persona> = [];
   socio: Persona = new Persona();
@@ -45,13 +43,19 @@ export class DepositoCreateComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.cedula = '';
+    console.log("Metodo DepositoCreateComponent.ngOnInit()");
     this.buildForm();
   }
 
   private buildForm() {
+    console.log("Metodo DepositoCreateComponent.buildForm()");
+
+    this.cedula = '';
 
     this.persona = null;
+    this.socio = null;
+    this.codigosocio = null;    
+    this.socios = [];
 
     const dateLength = 10;
     const today = new Date().toISOString().substring(0, dateLength);
@@ -93,7 +97,7 @@ export class DepositoCreateComponent implements OnInit {
   }
 
   public saveDeposito() {
-    console.log("Metodo DepositoCreateComponent.saveDeposito()");
+    console.log("METODO: DepositoCreateComponent.saveDeposito()");
 
     console.log(this.formGroup.value);
 
@@ -118,6 +122,7 @@ export class DepositoCreateComponent implements OnInit {
       return;
     }
 
+    // Realiza la validacion para el campo fechadeposito
     const fechadeposito = this.formGroup.get("fechadeposito").value;
     console.log('fechadeposito: ' + fechadeposito);
 
@@ -126,6 +131,7 @@ export class DepositoCreateComponent implements OnInit {
       return;
     }
 
+    // Realiza la validacion para el campo tipodeposito
     const tipodeposito = this.formGroup.get("tipodeposito").value;
     console.log('tipodeposito: ' + tipodeposito);
 
@@ -134,28 +140,48 @@ export class DepositoCreateComponent implements OnInit {
       return;
     }
 
-    const datos : any = this.formGroup.value;
+    const params : any = this.formGroup.value;
 
     if (this.persona != null) {
-      datos.codigopersona = this.persona.codigopersona;
+      params.codigopersona = this.persona.codigopersona;
     }
 
-    console.log(datos);
+    // Guarda el socio principal del deposito para guardar en la tabla DepositosSocios
+    let found = this.socios.find(element => element.codigopersona == this.persona.codigopersona);
 
-    this.depositosService.createDeposito(datos).subscribe((response: any) => {
+    console.log("found:");
+    console.log(found);
+
+    if (found == undefined) {
+      this.socios.push(this.persona);
+    }
+
+     // Guarda los socios relacionados al deposito para guardar en la tabla DepositosSocios
+    params.socios = this.socios;
+
+    // Llamada al servicio para guardar el deposito
+
+    console.log(params);
+
+    this.depositosService.createDeposito(params).subscribe((response: any) => {
       console.log("response:");
       console.log(response);
 
       if (response.deposito && response.deposito.codigodeposito !== null && response.deposito.codigodeposito > 0) {
-        this.flashMessagesService.show('El registro del deposito '+  datos.numerodeposito +' del socio ' + this.persona.cedula + 'se realizo correctamente.', { cssClass: 'alert-success', timeout: 2000 });
+        this.flashMessagesService.show('El registro del deposito '+  params.numerodeposito +' del socio ' + this.persona.cedula + 'se realizo correctamente.', { cssClass: 'alert-success', timeout: 2000 });
         this.buildForm();
       }
       else {
-        this.flashMessagesService.show(response.mensaje, { cssClass: 'alert-danger', timeout: 3000 });
+        this.flashMessagesService.show(response.mensaje, { cssClass: 'alert-danger', timeout: 5000 });
       }
 
     });
 
+  }
+
+  public cancelDeposito() {
+    console.log('METODO: DepositoCreateComponent.cancelDeposito()');
+    this.buildForm();
   }
 
   searchSocio = (text$: Observable<string>) => {
@@ -175,19 +201,27 @@ export class DepositoCreateComponent implements OnInit {
     );
   }
 
-  selectedSocio(item){
+  selectedSocio(item) {
+    console.log('METODO: selectedSocio()');
+
     this.codigosocio = item.item.codigopersona;
     
     console.log(this.codigosocio);
     
     this.modelSocio = item.item;
 
-    this.socios.push(item.item);
+    let found = this.socios.find(element => element.codigopersona == item.item.codigopersona);
 
+    console.log("found:");
+    console.log(found);
+
+    if (found == undefined) {
+      this.socios.push(item.item);
+    }
     console.log(this.socios);
 
     this.formGroup.patchValue({
-      socio: null
+      socio: ""
     });
   }
 
@@ -196,9 +230,22 @@ export class DepositoCreateComponent implements OnInit {
   } 
   
   inputFormatSocioListValue(value: any)   {
-    if(value.cedula)
-      return value.cedula
+    if(value.primerapellido) {
+      return value.primerapellido + " " + value.primernombre;
+    }
     return value;
+  }
+
+  removeSocioLote(socio: Persona) {
+    console.log('METODO: removeSocioLote()');
+    console.log('socio: ');
+    console.log(socio);
+
+    const index = this.socios.indexOf(socio);
+    if (index > -1) {
+      this.socios.splice(index, 1);
+    }
+    console.log(this.socios); 
   }
 
 }

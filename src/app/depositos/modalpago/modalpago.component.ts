@@ -99,6 +99,10 @@ export class ModalpagoComponent implements OnInit {
     console.log(this.codigodeposito);
     this.modelDeposito = item.item;
     console.log(this.modelDeposito);
+
+    if (this.modelDeposito && this.modelDeposito.codigodeposito) {
+      this.modelDeposito.valorpendientedeposito = (Number(this.modelDeposito.valordeposito) - Number(this.modelDeposito.valorutilizado));
+    }
   }
 
   searchDeposito = (text$: Observable<Deposito>) => {
@@ -170,9 +174,10 @@ export class ModalpagoComponent implements OnInit {
     }
 
     // VALIDA SI EL DEPOSITO TIENE SALDO DISPONIBLE PARA PAGAR LA COUTA
-    let valordeposito: Number = Number(deposito.valordeposito);
-    let valorutilizado: Number = Number(deposito.valorutilizado);
-    if (valorutilizado >= valordeposito) {
+    let valorDeposito: Number = Number(deposito.valordeposito);
+    let valorUtilizadoDeposito: Number = Number(deposito.valorutilizado);
+    let valorPendienteDeposito: Number = (Number(valorDeposito) - Number(valorUtilizadoDeposito));
+    if (valorUtilizadoDeposito >= valorDeposito) {
       this.mensaje = 'El deposito ('+deposito.numerodeposito+') del socio ('+this.pago.cedula+') esta utilizado completamente.'; 
       this.flashMessagesService.show(
         this.mensaje, 
@@ -182,17 +187,29 @@ export class ModalpagoComponent implements OnInit {
     }
 
     // VALIDA EL VALOR PAGO CUOTA
-    const valorpagocuotalote = this.formModalPago.get("valorpagocuotalote").value;
-    console.log('valorpagocuotalote: ' + valorpagocuotalote);
+    const valorPagoCuotaLote = this.formModalPago.get("valorpagocuotalote").value;
+    console.log('valorPagoCuotaLote: ' + valorPagoCuotaLote);
 
-    if (valorpagocuotalote == null || valorpagocuotalote === '') {
+    if (valorPagoCuotaLote == null || valorPagoCuotaLote === '') {
       this.mensaje = 'Ingrese el valor del pago de la cuota.';
       this.flashMessagesService.show(this.mensaje, { cssClass: 'alert-danger', timeout: 5000 });
       return;
     }
 
+    if (valorPagoCuotaLote <= 0) {
+      this.mensaje = 'El valor del pago de la cuota tiene que ser mayor a cero (0).';
+      this.flashMessagesService.show(this.mensaje, { cssClass: 'alert-danger', timeout: 5000 });
+      return;
+    }
+
+    if (valorPagoCuotaLote > valorPendienteDeposito) {
+      this.mensaje = 'El valor del pago de la cuota no tiene que ser mayor al valor pendiente del deposito seleccionado (' + valorPendienteDeposito + ').';
+      this.flashMessagesService.show(this.mensaje, { cssClass: 'alert-danger', timeout: 5000 });
+      return;
+    }
+
     // VALIDA EL VALOR PAGO CUOTA NO SEA MAYOR AL VALOR DE LA CUOTA
-    let valorpagocuotaloteN: Number = Number(valorpagocuotalote);
+    let valorpagocuotaloteN: Number = Number(valorPagoCuotaLote);
     let valorcuotaN: Number = Number(this.pago.valorcuota);
 
     if (valorpagocuotaloteN > valorcuotaN) {
@@ -224,6 +241,8 @@ export class ModalpagoComponent implements OnInit {
         );
       return;
     }
+
+    //
 
     const datos : any = this.formModalPago.value;
 
